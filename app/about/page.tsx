@@ -1,8 +1,11 @@
 import React from 'react'
 
+
 function AboutPage() {
+
+ 
   return (
-    <div>AboutPage</div>
+    <h2>About Page</h2>
   )
 }
 
