@@ -2,9 +2,9 @@ import React from 'react'
 
 function Hero() {
   return (
-    <div>
-      
-    </div>
+    <h1>
+      Hero
+    </h1>
   )
 }
 
