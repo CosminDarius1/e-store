@@ -1,14 +1,10 @@
-import React from 'react'
-import {FaHeart} from 'react-icons/fa'
-import { Button } from '../ui/button'
-
-
-function FavoriteToggleButton({productId}:{productId:string}) {
+import { FaHeart } from 'react-icons/fa';
+import { Button } from '@/components/ui/button';
+function FavoriteToggleButton({ productId }: { productId: string }) {
   return (
-    <Button size='icon' variant='outline' className='p2 cursor-pointer'>
-      <FaHeart/>
+    <Button size='icon' variant='outline' className='p-2 cursor-pointer'>
+      <FaHeart />
     </Button>
-  )
+  );
 }
-
-export default FavoriteToggleButton
+export default FavoriteToggleButton;
