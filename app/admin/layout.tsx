@@ -13,6 +13,7 @@ function DashboardLayout({children}:{children:React.ReactNode}) {
     <div className='lg:col-span-10 px-4'>
         {children}
     </div>
+    <div></div>
   </section>
   </>
     
