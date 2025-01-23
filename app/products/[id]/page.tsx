@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'; // If you're using Metadata types
 import BreadCrumbs from '@/components/single-product/BreadCrumbs';
 import { fetchSingleProduct } from '@/utils/actions';
 import Image from 'next/image';
@@ -5,7 +6,14 @@ import { formatCurrency } from '@/utils/format';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 import AddToCart from '@/components/single-product/AddToCart';
 import ProductRating from '@/components/single-product/ProductRating';
-async function SingleProductPage({ params }: { params: { id: string } }) {
+
+interface SingleProductPageProps {
+  params: {
+    id: string;
+  };
+}
+
+async function SingleProductPage({ params }: SingleProductPageProps) {
   const product = await fetchSingleProduct(params.id);
   const { name, image, company, description, price } = product;
   const dollarsAmount = formatCurrency(price);
@@ -13,7 +21,6 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
     <section>
       <BreadCrumbs name={product.name} />
       <div className='mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16'>
-        {/* IMAGE FIRST COL */}
         <div className='relative h-full'>
           <Image
             src={image}
@@ -24,7 +31,6 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
             className='w-full rounded-md object-cover'
           />
         </div>
-        {/* PRODUCT INFO SECOND COL */}
         <div>
           <div className='flex gap-x-8 items-center'>
             <h1 className='capitalize text-3xl font-bold'>{name}</h1>
@@ -42,4 +48,5 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
     </section>
   );
 }
+
 export default SingleProductPage;
