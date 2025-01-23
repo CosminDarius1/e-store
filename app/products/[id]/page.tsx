@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'; // If you're using Metadata types
 import BreadCrumbs from '@/components/single-product/BreadCrumbs';
 import { fetchSingleProduct } from '@/utils/actions';
 import Image from 'next/image';
@@ -7,13 +6,8 @@ import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 import AddToCart from '@/components/single-product/AddToCart';
 import ProductRating from '@/components/single-product/ProductRating';
 
-interface SingleProductPageProps {
-  params: {
-    id: string;
-  };
-}
 
-async function SingleProductPage({ params }: SingleProductPageProps) {
+async function SingleProductPage({ params }: { params: { id: string } }) {
   const product = await fetchSingleProduct(params.id);
   const { name, image, company, description, price } = product;
   const dollarsAmount = formatCurrency(price);
@@ -48,5 +42,4 @@ async function SingleProductPage({ params }: SingleProductPageProps) {
     </section>
   );
 }
-
 export default SingleProductPage;
