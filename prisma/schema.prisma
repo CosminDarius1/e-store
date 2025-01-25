@@ -10,10 +10,10 @@ generator client {
 
 model Product {
   id           String     @id @default(uuid())
-  name        String
-  company     String
-  description String
-  featured   Boolean
+  name        String? // Now optional
+  company     String? // Now optional
+  description String? // Now optional
+  featured    Boolean
   image       String
   price       Int
   createdAt    DateTime   @default(now())
