@@ -7,44 +7,37 @@ import { SubmitButton } from '@/components/form/Buttons';
 import CheckboxInput from '@/components/form/CheckboxInput';
 import ImageInputContainer from '@/components/form/ImageInputContainer';
 
-interface PageProps {
-  params: { id: string };
-}
 
-async function EditProductPage({ params }: PageProps) {
-  const { id } = params;
-  const product = await fetchAdminProductDetails(id);
+async function EditProductPage({params}:{params:{id:string}}) {
 
-  if (!product) {
-    return <p>Product not found</p>; // Handle case when product is null
-  }
-
-  const { name, company, description, featured, price, image } = product;
+  const {id} = params
+  const product = await fetchAdminProductDetails(id)
+  const {name, company,description,featured,price} = product
 
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'>Update Product</h1>
+      <h1 className='text-2xl font-semibold mb-8 capitalize'>update product</h1>
       <div className='border p-8 rounded'>
-        <ImageInputContainer action={updateProductImageAction} name={name ?? ''} image={image} text='Update Image'>
-          <input type='hidden' name='id' value={id} />
-          <input type='hidden' name='url' value={image} />
+        <ImageInputContainer action={updateProductImageAction} name={name ?? "" } image={product.image} text='update image'>
+          <input type='hidden'  name='id' value={id}/>
+          <input type='hidden' name='url' value={product.image}/>
         </ImageInputContainer>
         <FormContainer action={updateProductAction}>
           <div className='grid gap-4 md:grid-cols-2 my-4'>
             <input type="hidden" name="id" value={id} />
-            <FormInput type='text' name='name' label='Product Name' defaultValue={name ?? ''} />
-            <FormInput type='text' name='company' defaultValue={company ?? ''} />
-            <PriceInput defaultValue={price ?? 0} />
+            <FormInput type='text' name='name' label='product name' defaultValue={name ?? ""}/>
+            <FormInput type='text' name='company' defaultValue={company ?? undefined}/>
+            <PriceInput defaultValue={price}/>
           </div>
-          <TextAreaInput name='description' labelText='Product Description' defaultValue={description ?? ''} />
+          <TextAreaInput name='description' labelText='product description' defaultValue={description ?? ""}/>
           <div className='mt-6'>
-            <CheckboxInput name='featured' label='Featured' defaultChecked={featured ?? false} />
+            <CheckboxInput name='featured' label='featured' defaultChecked={featured}/>
           </div>
-          <SubmitButton text='Update Product' className='mt-8' />
+          <SubmitButton text='update product' className='mt-8'/>
         </FormContainer>
       </div>
     </section>
-  );
+  )
 }
 
-export default EditProductPage;
+export default EditProductPage
