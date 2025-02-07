@@ -14,12 +14,12 @@ async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
   const dollarsAmount = formatCurrency(price);
   return (
     <section>
-      <BreadCrumbs name={product.name} />
+      <BreadCrumbs name={product.name ?? ""} />
       <div className='mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16'>
         <div className='relative h-full'>
           <Image
             src={image}
-            alt={name}
+            alt={name ?? ""}
             fill
             sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
             priority
