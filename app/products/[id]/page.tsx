@@ -6,6 +6,8 @@ import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 import AddToCart from '@/components/single-product/AddToCart';
 import ProductRating from '@/components/single-product/ProductRating';
 import ShareButton from '@/components/single-product/ShareButton';
+import SubmitReview from '@/components/reviews/SubmitReview';
+import ProductReviews from '@/components/reviews/ProductReviews';
 
 
 async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
@@ -44,6 +46,8 @@ async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
           <AddToCart productId={params.id} />
         </div>
       </div>
+      {/* <ProductReviews productId={params.id}/> */}
+      {/* <SubmitReview productId={product.id}/> */}
     </section>
   );
 }
