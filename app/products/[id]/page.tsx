@@ -1,5 +1,5 @@
 import BreadCrumbs from '@/components/single-product/BreadCrumbs';
-import { fetchSingleProduct } from '@/utils/actions';
+import { fetchSingleProduct, findExistingReview } from '@/utils/actions';
 import Image from 'next/image';
 import { formatCurrency } from '@/utils/format';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
@@ -8,13 +8,15 @@ import ProductRating from '@/components/single-product/ProductRating';
 import ShareButton from '@/components/single-product/ShareButton';
 import SubmitReview from '@/components/reviews/SubmitReview';
 import ProductReviews from '@/components/reviews/ProductReviews';
-
+import {auth} from '@clerk/nextjs/server'
 
 async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const product = await fetchSingleProduct(params.id);
   const { name, image, company, description, price } = product;
-  const dollarsAmount = formatCurrency(price);
+  const poundsAmount = formatCurrency(price);
+  const {userId} = auth()
+  const reviewDoesNotExist = userId && !(await findExistingReview(userId,product.id))
   return (
     <section>
       <BreadCrumbs name={product.name ?? ""} />
@@ -40,14 +42,17 @@ async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
           <ProductRating productId={params.id} />
           <h4 className='text-xl mt-2'>{company}</h4>
           <p className='mt-3 text-md bg-muted inline-block p-2 rounded-md'>
-            {dollarsAmount}
+            {poundsAmount}
           </p>
           <p className='mt-6 leading-8 text-muted-foreground'>{description}</p>
           <AddToCart productId={params.id} />
         </div>
       </div>
       <ProductReviews productId={params.id}/>
-      <SubmitReview productId={product.id}/>
+
+      {
+        reviewDoesNotExist && <SubmitReview productId={product.id}/>
+      }
     </section>
   );
 }
