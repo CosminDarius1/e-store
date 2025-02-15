@@ -46,8 +46,8 @@ async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
           <AddToCart productId={params.id} />
         </div>
       </div>
-      {/* <ProductReviews productId={params.id}/> */}
-      {/* <SubmitReview productId={product.id}/> */}
+      <ProductReviews productId={params.id}/>
+      <SubmitReview productId={product.id}/>
     </section>
   );
 }
