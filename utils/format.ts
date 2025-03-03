@@ -5,3 +5,10 @@ export const formatCurrency = (amount: number | null) => {
       currency: 'GBP',
     }).format(value);
   };
+
+
+  export const formatDate = (date:Date) => {
+    return new Intl.DateTimeFormat('en-GB', {
+      year:'numeric', month:'long', day:'numeric'
+    }).format(date).replace(/(\d+) (\w+) (\d+)/, '$1 $2, $3');
+  }
