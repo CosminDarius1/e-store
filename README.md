@@ -5300,7 +5300,7 @@ export const POST = async (req: NextRequest) => {
 return {
   quantity: 1,
   price_data: {
-    currency: 'usd',
+    currency: 'gbp',
     product_data: {
       name: 'product name',
       images: ['product image url'],
