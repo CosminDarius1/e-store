@@ -21,16 +21,17 @@ async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
     <section>
       <BreadCrumbs name={product.name ?? ""} />
       <div className='mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16'>
-        <div className='relative h-full'>
-          <Image
-            src={image}
-            alt={name ?? ""}
-            fill
-            sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
-            priority
-            className='w-full rounded-md object-cover'
-          />
-        </div>
+  <div className='relative w-full h-[300px] sm:h-[400px] lg:h-full'>
+    <Image
+    src={image}
+    alt={name ?? ""}
+    fill
+    sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
+    priority
+    className='rounded-md object-contain'
+  />
+</div>
+
         <div>
           <div className='flex gap-x-8 items-center'>
             <h1 className='capitalize text-3xl font-bold'>{name}</h1>
