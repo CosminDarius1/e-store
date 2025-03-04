@@ -19,7 +19,7 @@ function HeroCarousel() {
             return <CarouselItem key={index}>
               <Card>
                 <CardContent className='p-2'>
-                  <Image src={image} alt='hero' className='w-full h-[24rem] rounded-md object-contain'/>
+                  <Image src={image} alt='hero' className='w-full h-[24rem] rounded-md object-cover'/>
                 </CardContent>
               </Card>
             </CarouselItem>
