@@ -1,3 +1,4 @@
+import Footer from "@/components/global/Footer"
 import LoadingContainer from "@/components/global/LoadingContainer"
 import FeaturedProducts from "@/components/home/FeaturedProducts"
 import Hero from "@/components/home/Hero"
@@ -10,6 +11,7 @@ function HomePage() {
       <Suspense fallback={<LoadingContainer/>}>
         <FeaturedProducts/>
       </Suspense>
+      <Footer/>
     </>
   )
 }
