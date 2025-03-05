@@ -3,6 +3,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 import { type NextRequest } from 'next/server';
 import db from '@/utils/db';
 
+
 export const POST = async (req: NextRequest) => {
   const requestHeaders = new Headers(req.headers);
   const origin = requestHeaders.get('origin');
@@ -45,6 +46,34 @@ export const POST = async (req: NextRequest) => {
       },
     };
   });
+
+  if(cart.tax > 0) {
+    line_items.push({
+      quantity:1,
+      price_data:{
+        currency:'gbp',
+        product_data:{
+          name:'Tax',
+          images:[]
+        },
+        unit_amount: cart.tax * 100,
+      },
+    })
+  }
+  if(cart.shipping > 0) {
+    line_items.push({
+      quantity:1,
+      price_data:{
+        currency:'gbp',
+        product_data:{
+          name:'Shipping',
+          images:[]
+        },
+        unit_amount: cart.shipping * 100,
+      },
+    })
+  }
+
   try {
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'embedded',
