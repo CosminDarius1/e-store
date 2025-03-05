@@ -16,6 +16,9 @@ function ProductsList({products}:{products:Product[]}) {
             return <article key={productId} className='group-relative'>
                 <Link href={`/products/${productId}`}>
                     <Card className='transform group-hover:shadow-xl transition-shadow duration-500'>
+                        <div className='absolute bottom-8 right-8 z-5'>
+                            <FavoriteToggleButton productId={productId}/>
+                        </div>
                         <CardContent className='p-8 gap-y-4 grid md:grid-cols-3'>
                             <div className='relative h-4 md:h-48 md:w-48'>
                                 <Image src={image} alt={name ?? ""} fill sizes='(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw' priority className='w-full rounded object-cover'/>
@@ -28,9 +31,7 @@ function ProductsList({products}:{products:Product[]}) {
                         </CardContent>
                     </Card>
                 </Link>
-                <div className='absolute bottom-8 right-8 z-5'>
-                    <FavoriteToggleButton productId={productId}/>
-                </div>
+                
             </article>
             
        })}
